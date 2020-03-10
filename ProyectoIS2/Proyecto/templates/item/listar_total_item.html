@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<td align="center">N°</td>
+			<td align="center">Nombre</td>
+			<td align="center">Fecha Creacion</td>
+			<td align="center">Descripcion</td>
+			<td align="center">Fecha de Modificacion</td>
+			<td align="center"> Linea Base </td>
+			<td align="center">Acciones</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if items %}
+		{% for item in items %}
+		<tr class="table-dark">
+			<td align="center">{{ item.id }}</td>
+			<td align="center">{{ item.nombre }}</td>
+			<td align="center">{{ item.fecha_creacion }}</td>
+			<td align="center">{{ item.descripcion }}</td>
+			<td align="center">{{ item.fecha_modificacion }}</td>
+			<td align="center">{{ item.linea.nombre_linea }}</td>
+			<td >
+				<a class="btn btn-primary" href="{% url 'item:editar_item' item.id %}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'item:eliminar_item' item.id %}">Eliminar</a>
+			</td>
+		</tr>
+		{% endfor %}
+		<h2 align="center">Lista de Item</h2>
+		{% else %}
+		<h2 align="center">No hay registros de Items</h2>
+		{% endif %}
+	</tbody>
+</table> 
+	<h><a class="btn btn-success" href="{% url 'proyecto:index_proyecto' %}">Volver</a></h>
+{% endblock%}

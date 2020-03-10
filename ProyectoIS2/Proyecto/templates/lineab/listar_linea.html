@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<td align="center">N°</td>
+			<td align="center"> Nombre </td>
+			<td align="center">Estado</td>
+			<td align="center">Proyecto</td>
+			<td align="center">Acciones</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% if object_list %}
+			{% for lista in object_list %}
+				<tr class="table-dark">
+					<td align="center">{{ lista.id }}</td>
+					<td align="center">{{ lista.nombre_linea }}</td>
+					<td align="center">{{ lista.estado }}</td>
+					<td align="center">{{ lista.proyecto.nombre }}</td>
+					<td align="center">
+						<a class="btn btn-primary" href="{% url 'lineab:editar_linea' lista.id %}">Editar</a>
+						<a class="btn btn-danger" href="{% url 'lineab:eliminar_linea' lista.id %}">
+							Eliminar
+						</a>
+						<a class="btn btn-success" href="{% url 'item:listar_item' lista.id %}">Ver Item</a>
+					</td>
+				</tr>
+			{% endfor %}
+			<h2 align="center">Lista de Linea Base</h2>	
+		{% else %}
+		<h2 align="center">No hay registros de Linea Base</h2>
+		{% endif %}
+	</tbody>
+</table> 
+
+<a class="btn btn-success" href="{% url 'proyecto:lista_total' %}">Volver</a>
+
+{% endblock%}

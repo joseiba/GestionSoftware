@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+{% block content %}
+{% if cantidad %}
+	<div class="alert alert-dismissible alert-warning">
+	  <button type="button" class="close" data-dismiss="alert">&times;</button>
+	  
+	  <h4 class="alert-heading">Warning!</h4>
+	  <p class="mb-0">La cantidad de proyectos a vencer este mes es {{cantidad}}, <a href="{% url 'proyecto:lista_total' %}" class="alert-link">listar proyectos</a>.</p>
+	</div>
+{% endif %} 
+<table class="table table-hover">
+  <thead>
+		<tr>
+			<td align="center">Nombre</td>
+			<td align="center">Fecha Limite</td>
+			<td align="center">Cantidad Días Atrasados</td>
+			<td align="center">Acciones</td>
+		</tr>		
+	</thead>
+	<tbody>
+		{% if proyectos %}
+			{% for proyecto in proyectos %}
+				<tr class="table-dark">
+					<td align="center">{{ proyecto.nombre }}</td>
+					<td align="center">{{ proyecto.fecha_limite }}</td>
+					<td align="center">{{ proyecto.cant_dias_atrasados }}</td>
+					<td align="center">
+						<a class="btn btn-success" href="{% url 'proyecto:editar_proyecto' proyecto.id%}">
+							Editar
+						</a>
+						<a class="btn btn-danger" href="{% url 'proyecto:eliminar_proyecto' proyecto.id%}">
+							Eliminar
+						</a>
+						<!--En listar proyecto se agregar listar las lineas base que tiene ese proyecto, por eso se le pasa el id del proyecto-->
+						<a class="btn btn-primary" href="{% url 'lineab:listar_linea' proyecto.id%}">
+							Ver Linea Base
+						</a>
+					</td>
+				</tr>
+			{% endfor %}
+			<h2 align="center">Lista de Proyectos Atrasados</h2>
+		{% else %}
+			<h2 align="center">No hay registros de Proyectos Atrasados</h2>
+		{% endif %}   
+	</tbody>
+</table> 
+
+{% endblock%}

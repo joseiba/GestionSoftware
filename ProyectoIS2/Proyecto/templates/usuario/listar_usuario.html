@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<td align="center">N°</td>
+			<td align="center">Nombre de Usuario</td>
+			<td align="center">Nombre</td>
+			<td align="center">Apellido</td>
+			<td align="center">Correo Electronico</td>
+			<td align="center">Acciones</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for usuario in object_list %}
+		<tr class="table-dark">
+			<td align="center">{{ usuario.id }}</td>
+			<td align="center">{{ usuario.username }}</td>
+			<td align="center">{{ usuario.first_name }}</td>
+			<td align="center">{{ usuario.last_name }}</td>
+			<td align="center">{{ usuario.email}}</td>
+            <!--<td>{{ usuario.proyecto.nombre}}</td>-->
+			<td align="center">
+                <a class="btn btn-primary" href="{% url 'usuario:usuario_editar' usuario.id  %}">Editar</a>
+				<a class="btn btn-danger" href="{% url 'usuario:usuario_eliminar' usuario.id %}">Eliminar</a>
+				<a class="btn btn-success" href="{% url 'proyecto:proyecto_listar' usuario.id %}">Ver Proyectos</a>
+			</td>
+		</tr>
+		{% endfor %}
+		<h2 align="center">Lista de Usuarios</h2>
+		{% else %}
+		<h2 align="center">No hay registros de Usuarios</h2>
+		{% endif %}
+	</tbody>
+</table> 
+            <h><a class="btn btn-success" href="{% url 'proyecto:index_proyecto' %}">Volver</a></h>
+
+{% endblock%}

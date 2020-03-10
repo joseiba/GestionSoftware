@@ -1,0 +1,11 @@
+{% extends 'base/base.html'%}
+
+{% block content %}
+	<h2>Item</h2>
+
+	<div><a class="btn btn-primary" href="{% url 'crear_item' %}">Crear Nuevo</a></div>
+
+	<div>
+		<div><a class="btn btn-primary" href="{% url 'item_listar' %}">	Listar</a></div>
+	</div>
+{% endblock %}

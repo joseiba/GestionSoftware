@@ -1,0 +1,24 @@
+{% extends 'login/base.html' %}
+{% block body_block %}
+<div class="login">
+	<form method="post" action="{% url 'home:user_login' %}">
+          {% csrf_token %}
+          {# A more "HTML" way of creating the login form#}
+        <div class="inicio">
+        	<h2>Iniciar sesión</h2>
+        </div>
+        <div>
+			{%for message in messages %}
+				<div class="alerta">{{message}}</div>
+			{%endfor%}
+		</div>
+		<label for="username">Nombre de Usuario:</label>
+		<input type="text" name="username" placeholder="&#9787; Username">
+		<label for="password">Contraseña:</label>
+		<input type="password" name="password" placeholder="&#128272; Password">
+		<div class="ingresar">
+			<input type="submit" name="" value="Ingresar">
+		</div>
+	</form>
+</div>
+{% endblock %}

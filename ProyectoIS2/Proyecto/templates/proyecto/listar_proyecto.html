@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<td align="center">N°</td>
+			<td align="center">Nombre</td>
+			<td align="center">Objetivo</td>
+			<td align="center">Fecha Inicio</td>
+			<td align="center">Fecha Limite</td>
+			<td align="center">Estado</td>
+			<td align="center">Fase</td>
+			<td align="center">Vence este mes</td>
+			<td align="center">Usuario</td>
+			<td align="center" >Acciones</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% if object_list %}
+			{% for proyecto in object_list %}
+				<tr class="table-dark">
+					<td align="center">{{ proyecto.id }}</td>
+					<td align="center">{{ proyecto.nombre }}</td>
+					<td align="center">{{ proyecto.objetivo }}</td>
+					<td align="center">{{ proyecto.fecha_ini }}</td>
+					<td align="center">{{ proyecto.fecha_limite }}</td>
+					<td align="center">{{ proyecto.estado }}</td> 
+					<td align="center">{{ proyecto.fase}}</td>
+					<td align="center">{{ proyecto.vence_mes}}</td>
+					<td align="center">{{ proyecto.usu.username}}</td>
+					<td align="center">
+						<a class="btn btn-primary" href="{% url 'proyecto:editar_proyecto' proyecto.id%}">Editar</a>
+						<a class="btn btn-danger" href="{% url 'proyecto:eliminar_proyecto' proyecto.id  %}">Eliminar</a>
+						<!--En listar proyecto se agregar listar las lineas base que tiene ese proyecto, por eso se le pasa el id del proyecto-->
+						<a class="btn btn-success" href="{% url 'lineab:listar_linea' proyecto.id%}">Ver Linea Base</a>
+					</td>
+				</tr>
+			{% endfor %}
+			<h2 align="center">Lista de Proyectos</h2>
+		{% else %}
+			<h2 align="center">No hay registros de Proyectos</h2>
+		{% endif %}
+	</tbody>
+</table> 
+<h><a class="btn btn-success" href="{% url 'proyecto:index_proyecto'%}">Volver</a></h>
+
+{% endblock%}

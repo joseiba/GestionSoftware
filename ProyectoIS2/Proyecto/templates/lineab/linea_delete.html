@@ -1,0 +1,10 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	<h3>¿Desea eliminar la Linea Base {{ object.nombre_linea }}?</h3>	
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-success" href="{% url 'lineab:lista_total' %}">Cancelar</a>
+</form>
+{% endblock %}
