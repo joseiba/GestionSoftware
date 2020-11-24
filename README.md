@@ -1,4 +1,4 @@
-# Software de Gestion de la Confifuracion
+# Software de Gestion de la Configuracion
 Ambiente de Desarrollo
 
 -Python 3
